@@ -1,5 +1,5 @@
 // app.js
-
+const mongoose = require('mongoose');
 const express = require("express");
 const path = require("path");
 const pageRoutes = require("./routes/pageRoutes");
@@ -12,7 +12,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use("/", pageRoutes);
-//koos is watching
+
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
