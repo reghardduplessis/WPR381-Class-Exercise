@@ -12,7 +12,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use("/", pageRoutes);
-
+//koos is watching
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
@@ -35,17 +35,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // MongoDB connection
-mongoose.connect('mongodb://127.0.0.1:27017/recordsDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-// Define schema and model
-const RecordSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  age: Number,
-});
+mongoose.connect('mongodb://127.0.0.1:27017/recordsDB');
 
 const Record = mongoose.model('Record', RecordSchema);
 
