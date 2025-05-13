@@ -30,9 +30,9 @@ mongoose.connection.on("disconnected", () => {
 });
 
 app.use("/", pageRoutes);
-
-app.listen(PORT, HOST,() => {
-  console.log(`Server running on http://${HOST}:${PORT}`);
+//koos is watching
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
 
 /*
