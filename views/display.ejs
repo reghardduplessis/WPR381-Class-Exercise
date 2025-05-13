@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appliance Records</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>Appliance Records</h1>
+
+    <% if (appliances.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Appliance Name</th>
+                    <th>Insured Status</th>
+                    <th>Condition</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% appliances.forEach(item => { %>
+                    <tr>
+                        <td><%= item.applianceName %></td>
+                        <td><%= item.insuredStatus %></td>
+                        <td><%= item.applianceCondition %></td>
+                        <td>R<%= item.applianceValue %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No records found.</p>
+    <% } %>
+</body>
+</html>
