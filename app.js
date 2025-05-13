@@ -19,6 +19,13 @@ app.listen(port, () => {
 
 /*
 // From GPT:
+// First install:
+mkdir mongo-crud-api
+cd mongo-crud-api
+npm init -y
+npm install express mongoose body-parser
+
+//Code:
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
