@@ -1,43 +1,41 @@
 // app.js
-const mongoose = require('mongoose');
+//imports and initializing values
 const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+require("dotenv").config();
 const path = require("path");
+
+const PORT = 3000;
+const HOST = "localhost";
+const dbURL = `mongodb://${HOST}/recordsDB`; 
 const pageRoutes = require("./routes/pageRoutes");
 
-const app = express();
-const port = 3000;
-
-app.use(express.static(path.join(__dirname, "public")));
+//setting used modules
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+//database connection
+mongoose.connect(dbURL);
+mongoose.connection.on("connected", () => {
+  console.log("Mongoose connected");
+});
+mongoose.connection.on("error", (err) => {
+  console.log(`Mongoose connection error: ${err}`);
+});
+mongoose.connection.on("disconnected", () => {
+  console.log("Mongoose disconnected");
+});
 
 app.use("/", pageRoutes);
 
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+app.listen(PORT, HOST,() => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
 });
 
 /*
-// From GPT:
-// First install:
-mkdir mongo-crud-api
-cd mongo-crud-api
-npm init -y
-npm install express mongoose body-parser
-
-//Code:
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-
-// Initialize app
-const app = express();
-app.use(bodyParser.json());
-
-// MongoDB connection
-mongoose.connect('mongodb://127.0.0.1:27017/recordsDB');
-
 const Record = mongoose.model('Record', RecordSchema);
 
 // Add a new record
@@ -98,9 +96,4 @@ app.delete('/delete/:id', async (req, res) => {
   }
 });
 
-// Start the server
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
 */
